@@ -73,8 +73,21 @@ const bstHeight = tree => {
   The tree on the right is superbalanced since the difference in height is not more than 1 at any given subtree.
  */
 
-const superbalanced = tree => {
-  
-};
+  const superbalanced = tree => {
+    function checkHeights (node, Lheight, Rheight) {
+      console.log('initial check', node.value, Lheight, Rheight, Math.abs(Lheight - Rheight))
+      if (Math.abs(Lheight - Rheight) > 1) return false; 
+      //if we go down the left path, go until the node.left.left is null and calculate there
+      if (node.left) {
+        checkHeights(node.left, Lheight+1, Rheight)
+      }
+      if (node.right) {
+        checkHeights(node.right, Lheight, Rheight+1)
+      }
+    }
+    checkHeights(tree, 0, 0)
+    //if we can traverse the entire tree without triggering line 81, it is true
+    return true; 
+  };
 
 module.exports = {BinarySearchTree, bstHeight, superbalanced};
