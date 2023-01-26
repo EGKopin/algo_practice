@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "graphql-operation-statistics": "^1.2.2"
+  }
+}
