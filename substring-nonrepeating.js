@@ -32,30 +32,35 @@ characters. How do we keep track of this "window"?
 
 const substringNonrepeating = str => {
 
+  let left = right = 0;
+
   let maxLength = 0;
 
-  const usedLetters = new Set ([str[0]]);
+  const usedLetters = new Set ();
 
-  for (let i = 1; i < str.length; i++){
+  while (right < str.length){
 
-      if (usedLetters.has(str[i])) {
+      if (!usedLetters.has(str[right])) {
 
-          maxLength = Math.max(maxLength, usedLetters.size)
+         usedLetters.add(str[right]);
 
-          usedLetters.clear()
+         maxLength = Math.max(maxLength, usedLetters.size);
+
+         right++;
 
       } else {
 
-          usedLetters.add(str[i])
+          usedLetters.delete(str[left])
 
-      }            
+          left++
+
+      }    
 
   }
 
-  maxLength = Math.max(maxLength, usedLetters.size) //if the longest substring goes to the end
-
   return maxLength
 
+}
 };
 
 module.exports = {substringNonrepeating};
